@@ -5,8 +5,6 @@ categories:
 feature_image: "https://picsum.photos/2560/600?image=872"
 ---
 
-## 起源
-
 之前在開發階段，只使用 env 很容易與其他專案搞混一起。所以有採用讀取特地檔案 `.env` 來協助處理。當初使用 [godotenv](https://github.com/joho/godotenv) 會自動讀取本地的 `.env` 檔。
 
 後來漸漸發現有時要測試別的環境的設定時，需要抓取目標環境的 `.env`，但又不是每個環境變數都需要使用，又需要配合去更改......非常的不方便，有時還會遺漏。
@@ -68,7 +66,7 @@ func main() {
 	if err := serverCmd.Execute(); err != nil {
 		panic(err)
 	}
-}
+ }
 ```
 在這裡可以選擇是否要再加一個套件 [godotenv](https://github.com/joho/godotenv) 是否要讓他讀取本地的 `.env` 檔，因為 viper 並不會讀
 ```go
@@ -86,7 +84,6 @@ vport 81
 ```diff
 func main() {
 	viper.AutomaticEnv() // auto load env
-
 +	viper.SetConfigType("yaml") // setting config file type
 +	viper.SetConfigName("config") // setting config file name
 +	viper.AddConfigPath(".") // setting config file path
@@ -105,7 +102,7 @@ func main() {
 	if err := serverCmd.Execute(); err != nil {
 		panic(err)
 	}
-}
+ }
 ```
 設定檔的內容目前設置像這樣
 ```yaml
@@ -156,7 +153,7 @@ func main() {
 	if err := serverCmd.Execute(); err != nil {
 		panic(err)
 	}
-}
+ }
 ```
 
 若覺得一個一個取值很麻煩的話，viper 也提供直接 Unmarshal 在一個 struct 中，若想知道這部分要怎麼使用的話可至我的 [範例](https://github.com/Li-AnLin/viper-example) 中參考。
