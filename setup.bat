@@ -1,0 +1,1 @@
+docker run --rm -d --name jekyll_service --volume="%cd%:/srv/jekyll" -p 4000:4000 jekyll-test jekyll serve --force_polling
